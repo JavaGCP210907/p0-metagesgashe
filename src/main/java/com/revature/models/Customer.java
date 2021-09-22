@@ -45,8 +45,8 @@ public class Customer {
 	//toString method
 		@Override
 		public String toString() {
-			return "Name: " + f_name +" "+ l_name + " Address: " +  street_number + ", "
-					+ city + ", " + state + " " + zip_code;
+			return customer_id + ". " + "Name: " + f_name +" "+ l_name + " Address: " +  street_number + " "
+					+ city + ", " + state + ", " + zip_code;
 		}
 		
 

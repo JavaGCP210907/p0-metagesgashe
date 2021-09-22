@@ -39,9 +39,9 @@ SELECT * FROM customers c LEFT JOIN products p ON c.customer_id = p.customer_id;
 
 select p.product_name, p.price, c.f_name, c.l_name from products p join customers c on p.customer_id = c.customer_id where c.f_name='John';
 
---SELECT concat(f_name, ' ', l_name) AS "Full Name", concat(Street_number, ', ', city, ', ', state, ' ', zip_code) AS Address  FROM customers;
+--SELECT concat(f_name, ' ', l_name) AS "Full Name", concat(Street_number, ', ', city, ', ', state, ' ', zip_code) AS "Address"  FROM customers;
 
 SELECT * FROM products;
- SELECT * FROM customers;
+SELECT * FROM customers;
 
 

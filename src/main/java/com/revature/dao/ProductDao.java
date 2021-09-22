@@ -135,7 +135,7 @@ public class ProductDao implements ProductDaoInterface {
 			ps.setInt(4, prod.getCustomer_id());
 			
 			ps.executeUpdate();
-			System.out.println("Product " + prod.getProduct_name() + "was added!");
+			System.out.println("Product " + prod.getProduct_name() + " was added!");
 			System.out.println();
 			System.out.println();
 		} catch (SQLException e) {

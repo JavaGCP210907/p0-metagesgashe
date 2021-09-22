@@ -24,7 +24,7 @@ public class Menu {
 	//displayMenu method
 	public void displayMenu() {
 		System.out.println("*=================================================*");
-		System.out.println("Welcome to Our Electronics store!");
+		System.out.println("Welcome to XYZ Electronics store order management application!");
 		System.out.println("*=================================================*");
 		
 		
@@ -38,10 +38,12 @@ public class Menu {
 			System.out.println("hi -> for greetings");
 			System.out.println("products -> for list of products");
 			System.out.println("productById -> for a product by Id");
+			System.out.println("customers -> for customer's name and address");
 			System.out.println("productByCustomerName -> for product by customer first name");
-			System.out.println("address -> for customer's address");
+			System.out.println("addCustomer -> to add new customer");
 			System.out.println("addProduct -> to add new product");
-			System.out.println("delete -> to delete a product");
+			System.out.println("deleteProduct -> to delete a product");
+			System.out.println("deleteCustomer - > to delete a customer");
 			System.out.println("exit -> to exit from the program");
 			String line = scan.nextLine();
 			
@@ -110,17 +112,19 @@ public class Menu {
 					}
 					
 					break;
-				case "address":
+				case "customers":
 					
 					List<Customer> custAddress = custDao.getCustomerAddress();
 					if (custAddress.size() != 0) {
-						System.out.println("Here is the address of customers");
+						System.out.println("Here is the list of customers with their address: ");
 						System.out.println();
 						for (Customer c: custAddress) {
 							System.out.println(c);
+							System.out.println();
 						}
 					}
-							break;
+					break;
+					
 				case "addProduct":
 					
 					System.out.println("what is the name of the product?");
@@ -142,7 +146,33 @@ public class Menu {
 					
 					log.info("USER ADDED PRODUCT TYPE "+ productName);
 					break;
-				case "delete":
+					
+				case "addCustomer":
+					System.out.println("First name: ");
+					String f_name = scan.nextLine();
+					
+					System.out.println("Last name: ");
+					String l_name = scan.nextLine();
+					
+					System.out.println("Street number: ");
+					String street = scan.nextLine();
+					
+					System.out.println("City: ");
+					String city = scan.nextLine();
+					
+					System.out.println("State: ");
+					String state = scan.nextLine();
+					
+					System.out.println("Zip code: ");
+					String zip_code = scan.nextLine();
+					
+					Customer customer = new Customer(f_name, l_name, street, city, state, zip_code);
+					custDao.addCustomer(customer);
+					
+					log.info("USER ADDED CUSTOMER "+ f_name);
+					break;
+					
+				case "deleteProduct":
 					System.out.println("Which product do you want to delete? please type the id: ");
 					int id = scan.nextInt();
 					scan.nextLine();
@@ -151,10 +181,21 @@ public class Menu {
 					
 					log.warn("HELLO USER DELETED PRODUCT ID NUMBER " + id);
 					break;
+					
+				case "deleteCustomer":
+					System.out.println("Which customer do you want to delete? please use customer id: ");
+					int cust_id = scan.nextInt();
+					scan.nextLine();
+					
+					custDao.deletCustomer(cust_id);
+					log.warn("HELLO USER DELETED A CUSTOMER ID NUMBER " + cust_id);
+					break;
+					
 				case "exit":
 					displayMenu = false;
-					System.out.println("Thank you. come back soon");
+					System.out.println("Thank you for using our application! \nCome back soon");
 					break;
+					
 				default:
 					System.err.println("Something went wrong... try again please!");
 					break;

@@ -1,6 +1,7 @@
 package com.revature.dao;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -23,6 +24,7 @@ public class CustomerDao implements CustomerDaoInterface {
 			List<Customer> addressList = new ArrayList<>();
 			while(rs.next()) {
 				Customer c = new Customer(
+						rs.getInt("customer_id"),
 						rs.getString("f_name"),
 						rs.getString("l_name"),
 						rs.getString("street_number"),
@@ -41,5 +43,55 @@ public class CustomerDao implements CustomerDaoInterface {
 		}
 		return null;
 	}
+
+	@Override
+	public void addCustomer(Customer cust) {
+		
+			try(Connection conn = ConnectionUtil.getConnection()){
+				
+				String sql = "insert into customers (f_name, l_name, street_number, city, state, zip_code) values (?, ?, ?, ?, ?, ?)";
+				
+				PreparedStatement ps = conn.prepareStatement(sql);
+				
+				ps.setString(1, cust.getF_name());
+				ps.setString(2, cust.getL_name());
+				ps.setString(3, cust.getStreet_number());
+				ps.setString(4, cust.getCity());
+				ps.setString(5, cust.getState());
+				ps.setString(6, cust.getZip_code());
+				ps.executeUpdate();
+				
+				System.out.println("Customer " + cust.getF_name() + " was added!");
+				System.out.println();
+				System.out.println();
+			} catch (SQLException e) {
+				System.err.println("Sorry we can't add the customer");
+				System.out.println();
+				e.printStackTrace();
+			}
+
+		}
+	
+	@Override
+	public void deletCustomer(int id) {
+		
+		try (Connection conn = ConnectionUtil.getConnection()){
+			String sql = "delete from customers where customer_id = ?";
+			
+			PreparedStatement ps = conn.prepareStatement(sql);
+			
+			ps.setInt(1, id);
+			ps.executeUpdate();
+			System.out.println("The customer with id number " + id + " is deleted!");
+			System.out.println();
+			
+		} catch (SQLException e) {
+			System.err.println("Sorry we can't delete the customer");
+			System.err.println("Sorry some thing went wrong. We can't delete the customer.");
+		}
+		
+	}
+		
+	
 
 }
