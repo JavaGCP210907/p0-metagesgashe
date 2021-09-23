@@ -23,9 +23,9 @@ public class Menu {
 	
 	//displayMenu method
 	public void displayMenu() {
-		System.out.println("*=================================================*");
-		System.out.println("Welcome to XYZ Electronics store order management application!");
-		System.out.println("*=================================================*");
+		System.out.println("*======================================================*");
+		System.out.println("Welcome to XYZ Electronics order management application!");
+		System.out.println("*======================================================*");
 		
 		
 		boolean displayMenu = true;
@@ -34,17 +34,29 @@ public class Menu {
 		
 		while (displayMenu) {
 			System.out.println();
-			System.out.println("Choose an option please: ");
-			System.out.println("hi -> for greetings");
-			System.out.println("products -> for list of products");
-			System.out.println("productById -> for a product by Id");
-			System.out.println("customers -> for customer's name and address");
+			System.out.println("Choose an option please: \n");
+			
+			System.out.println("hi             -> for greetings");
+			
+			System.out.println("products       -> for list of products");
+			
+			System.out.println("productById    -> for a product by Id");
+			
+			System.out.println("customers      -> for customers names and addresses");
+			
 			System.out.println("productByCustomerName -> for product by customer first name");
-			System.out.println("addCustomer -> to add new customer");
-			System.out.println("addProduct -> to add new product");
-			System.out.println("deleteProduct -> to delete a product");
-			System.out.println("deleteCustomer - > to delete a customer");
-			System.out.println("exit -> to exit from the program");
+			
+			System.out.println("addCustomer    -> to add new customer");
+			
+			System.out.println("addProduct     -> to add new product");
+			
+			System.out.println("updatePrice    -> to update the price of a product");
+			
+			System.out.println("deleteProduct  -> to delete a product");
+			
+			System.out.println("deleteCustomer -> to delete a customer");
+			
+			System.out.println("exit           -> to exit from the application");
 			String line = scan.nextLine();
 			
 			switch (line) {
@@ -170,6 +182,18 @@ public class Menu {
 					custDao.addCustomer(customer);
 					
 					log.info("USER ADDED CUSTOMER "+ f_name);
+					break;
+				
+				case "updatePrice":
+					System.out.println("product_id: ");
+					int proId = scan.nextInt();
+					scan.nextLine();
+					System.out.println("New price: ");
+					double newPrice = scan.nextDouble();
+					scan.nextLine();
+					
+					proDao.updatePrice(proId, newPrice);
+					log.info("HELLO USER UPDATED THE PRICE OF ID " + proId);
 					break;
 					
 				case "deleteProduct":

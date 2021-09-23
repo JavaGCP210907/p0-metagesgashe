@@ -145,7 +145,23 @@ public class ProductDao implements ProductDaoInterface {
 		}
 
 	}
-
+	
+	@Override
+	public void updatePrice(int id, double price) {
+		try(Connection conn = ConnectionUtil.getConnection()){
+			String sql = "update products set price = ? where product_id = ?";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setDouble(1, price);
+			ps.setInt(2, id);
+			ps.executeUpdate();
+			System.out.println("The price of product id " + id + " is updated to " + price);
+		}catch (SQLException e) {
+			System.out.println("Sorry we can't update the price");
+			e.printStackTrace();
+		}
+		
+	}
+	
 	@Override
 	public void deletProduct(int id) {
 		
@@ -164,5 +180,7 @@ public class ProductDao implements ProductDaoInterface {
 		}
 		
 	}
+
+	
 
 }

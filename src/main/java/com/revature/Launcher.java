@@ -11,7 +11,7 @@ public class Launcher {
 	public static void main(String[] args) {
 
 		try (Connection con = ConnectionUtil.getConnection()){
-			System.out.println("Connection was successful!");
+			//System.out.println("Connection was successful!");
 		} catch (SQLException e) {
 			System.err.println("Sorry connection failed!");
 			e.printStackTrace();

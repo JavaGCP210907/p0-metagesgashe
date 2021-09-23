@@ -41,7 +41,11 @@ select p.product_name, p.price, c.f_name, c.l_name from products p join customer
 
 --SELECT concat(f_name, ' ', l_name) AS "Full Name", concat(Street_number, ', ', city, ', ', state, ' ', zip_code) AS "Address"  FROM customers;
 
+update products set price = 1500 where product_id = 2;
+
 SELECT * FROM products;
 SELECT * FROM customers;
+
+
 
 
